@@ -21,6 +21,14 @@ export default function App() {
             Register mother
           </NavLink>
         </nav>
+
+        <div className="sidebar-footer">
+          <div className="clinic-mark">C</div>
+          <div>
+            <div className="clinic-name">Clinic staff view</div>
+            <div className="clinic-role">Postnatal care team</div>
+          </div>
+        </div>
       </aside>
 
       <main>
