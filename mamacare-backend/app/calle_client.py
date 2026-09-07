@@ -58,7 +58,7 @@ def start_call(
         "metadata": {"schedule_id": schedule_id},
     }
 
-    with httpx.Client(timeout=30.0) as client:
+    with httpx.Client(timeout=90.0) as client:
         response = client.post(
             f"{CALLE_API_BASE}/v1/calls",
             headers=_headers(idempotency_key),
@@ -72,7 +72,7 @@ def start_call(
 
 
 def get_call_status(call_id: str) -> dict:
-    with httpx.Client(timeout=30.0) as client:
+    with httpx.Client(timeout=90.0) as client:
         response = client.get(
             f"{CALLE_API_BASE}/v1/calls/{call_id}",
             headers={"Authorization": f"Bearer {CALLE_API_KEY}"},
