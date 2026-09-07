@@ -46,7 +46,7 @@ def start_call(
     payload = {
         "task": task,
         "recipients": [
-            {"phones": [phone], "region": "KE", "locale": "en-US"}
+            {"phones": [phone], "region": "US", "locale": "en-US"}
         ],
         "result_schema": {
             "type": "object",
