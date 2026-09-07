@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Routes, Route, NavLink, Navigate } from 'react-router-dom'
 import RegisterMother from './components/RegisterMother'
 import Dashboard from './components/Dashboard'
+import { useState } from 'react'
 
 export default function App() {
-  const [page, setPage] = useState('dashboard')
   const [refreshKey, setRefreshKey] = useState(0)
+  const navigate = useNavigate()
 
   return (
     <div className="app-shell">
@@ -12,26 +14,32 @@ export default function App() {
         <h1>MamaCare AI</h1>
         <div className="tagline">Postnatal follow-up, by phone</div>
         <nav>
-          <a
-            className={page === 'dashboard' ? 'active' : ''}
-            onClick={() => setPage('dashboard')}
-          >
+          <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
             Dashboard
-          </a>
-          <a
-            className={page === 'register' ? 'active' : ''}
-            onClick={() => setPage('register')}
-          >
+          </NavLink>
+          <NavLink to="/register" className={({ isActive }) => (isActive ? 'active' : '')}>
             Register mother
-          </a>
+          </NavLink>
         </nav>
       </aside>
 
       <main>
-        {page === 'dashboard' && <Dashboard refreshKey={refreshKey} />}
-        {page === 'register' && (
-          <RegisterMother onRegistered={() => { setRefreshKey((k) => k + 1); setPage('dashboard') }} />
-        )}
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard refreshKey={refreshKey} />} />
+          <Route
+            path="/register"
+            element={
+              <RegisterMother
+                onRegistered={() => {
+                  setRefreshKey((k) => k + 1)
+                  navigate('/dashboard')
+                }}
+              />
+            }
+          />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
       </main>
     </div>
   )

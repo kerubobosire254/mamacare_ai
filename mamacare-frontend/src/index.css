@@ -65,15 +65,22 @@ h1, h2, h3 {
   display: block;
   color: #E7EEE9;
   text-decoration: none;
-  padding: 10px 0;
+  padding: 10px 0 10px 12px;
   font-size: 14px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-left: 2px solid transparent;
   cursor: pointer;
 }
 
 .sidebar nav a.active {
   color: #fff;
   font-weight: 600;
+  border-left-color: var(--care);
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--care);
+  outline-offset: 2px;
 }
 
 main {
