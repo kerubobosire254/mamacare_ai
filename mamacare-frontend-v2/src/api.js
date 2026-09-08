@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000'
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://mamacare-ai-1.onrender.com'
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -15,6 +15,7 @@ async function request(path, options = {}) {
 export const api = {
   registerMother: (data) => request('/mothers', { method: 'POST', body: JSON.stringify(data) }),
   listMothers: () => request('/mothers'),
+  motherSchedules: (id) => request(`/mothers/${id}/schedules`),
   listCallLogs: () => request('/call-logs'),
   listEscalations: () => request('/escalations'),
   listSchedules: (status) => request(`/schedules${status ? `?status=${status}` : ''}`),
